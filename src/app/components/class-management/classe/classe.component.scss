@@ -1,0 +1,50 @@
+
+  .class{
+    margin-left: 50pX;
+    margin-right: 50pX;
+  }
+  .class-global{
+    margin-left: 50pX;
+    margin-right: 50pX;
+    margin-bottom: 5px;
+    height: 5px;
+    padding: 24px;
+    }
+    .table {
+      table-layout: fixed;
+      width: 100%;
+    }
+    .table th, .table td {
+      text-align: center;
+      vertical-align: middle;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+       padding: auto;
+    }
+    
+    @media only screen and (max-width: 600px) {
+
+    .class-global{
+      padding: initial;
+      height: initial; 
+       margin-bottom: -20px;
+      max-height: 40px;
+    }
+    .add{
+      padding: 10px;
+      margin-right: 20px;
+      font-size: 11px; 
+    }
+   .card-header {
+      font-size: 14px; 
+      line-height: 1.2; 
+    margin-left: 0px;
+    }
+    .table {
+      table-layout: initial;
+      width: initial;
+    }
+    
+
+    }
