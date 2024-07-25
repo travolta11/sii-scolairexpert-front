@@ -7,14 +7,14 @@
     <div class="modal-body">
       <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
-          <label class="form-label" for="basic-default-fullname" style="font-size: medium;">Username</label>
+          <label class="form-label" for="basic-default-fullname" >Username</label>
           <input type="text" class="form-control" id="basic-default-fullname" placeholder="Enter username" formControlName="username"/>
           <div *ngIf="userForm.get('username')?.touched && userForm.get('username')?.invalid" class="text-danger">
             Username is required.
           </div>
         </div>
         <div class="mb-3">
-          <label class="form-label" for="password" style="font-size: medium;">Password</label>
+          <label class="form-label" for="password" >Password</label>
           <div class="input-group input-group-merge">
             <input
               type="password"
@@ -35,10 +35,10 @@
           </div>
         </div>
         <div class="mb-3">
-          <label class="form-label" for="basic-default-email" style="font-size: medium;">Email</label>
+          <label class="form-label" for="basic-default-email">Email</label>
           <div class="input-group input-group-merge">
             <input
-              type="text"
+              type="email"
               id="basic-default-email"
               class="form-control"
               placeholder="Enter email"
@@ -55,7 +55,7 @@
           <div class="form-text">You can use letters, numbers & periods</div>
         </div>
         <div class="mb-3">
-          <label for="exampleFormControlSelect1" class="form-label" style="font-size: medium;">Role</label>
+          <label for="exampleFormControlSelect1" class="form-label" >Role</label>
           <select class="form-select" id="exampleFormControlSelect1" aria-label="Select role" formControlName="role">
             <option value="" selected>Select role</option>
             <option value="1">Administration</option>
