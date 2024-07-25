@@ -5,6 +5,7 @@ import { KeycloakService } from './services/keycloak/keycloak.service';
 import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { APP_INITIALIZER } from '@angular/core';
+
 export function kcFactory(kcService: KeycloakService) {
   return () => kcService.init();
 }
@@ -13,7 +14,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(
-      withInterceptorsFromDi() // Include legacy interceptors if needed
+      withInterceptorsFromDi()
     ),
     KeycloakService,
     {
