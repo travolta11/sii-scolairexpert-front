@@ -39,7 +39,11 @@ export class KeycloakService {
           this._profile= (await this.keycloak?.loadUserProfile()) as UserProfile;
           this._profile.token = this.keycloak?.token;
         }
-        console.log(this._profile?.token);
+        const token = this._profile?.token;
+        if (token) {
+            localStorage.setItem('token', token);
+        }
+        
       } catch (error) {
         console.error('Keycloak initialization error:', error);
       }

@@ -4,7 +4,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { UnauthorizedComponent } from './components/unauthorized';
 
 export const routes: Routes = [
-    { path: '', title: 'DashBoard', component: DashboardComponent, canActivate: [AuthGuard], data: { roles: ['test'] } },
+    { path: '', title: 'DashBoard', component: DashboardComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
     { path: 'unauthorized', component: UnauthorizedComponent },
     // Route example: { path: 'add-student', title: 'Add', component: AddStudentComponent },
     
