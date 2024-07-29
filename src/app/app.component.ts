@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component  } from '@angular/core';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { PageContentComponent } from './shared/page-content/page-content.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
