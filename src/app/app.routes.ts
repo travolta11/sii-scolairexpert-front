@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AddClassComponent } from './components/class-management/add-class/add-class.component';
-import { ClasseComponent } from './components/class-management/classe/classe.component';
+import { ClasseComponent } from './components/class-management/class/class.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export const routes: Routes = [
