@@ -1,0 +1,9 @@
+
+
+export enum Position {
+  TEACHER = 'TEACHER',
+  ASSISTANT = 'ASSISTANT',
+  CLEANER = 'CLEANER',
+  SECURITY_OFFICER = 'SECURITY_OFFICER'
+}
+
