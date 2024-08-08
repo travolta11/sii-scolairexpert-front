@@ -1,6 +1,8 @@
 import { CommonModule, NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { User } from '../../../model/user';
+import { UserService } from '../../../services/user/user.service';
 
 @Component({
   selector: 'ssi-sx-add-user',
@@ -11,6 +13,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class AddUserComponent {
   isPasswordHidden = true;
+  @Output() userAdded = new EventEmitter<User>();
 
   togglePasswordVisibility() {
     this.isPasswordHidden = !this.isPasswordHidden;
@@ -22,7 +25,7 @@ export class AddUserComponent {
 
   userForm: FormGroup;
 
-  constructor() {
+  constructor(private userService: UserService) {
     this.userForm = new FormGroup({
       username: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required, Validators.email]),
@@ -33,9 +36,34 @@ export class AddUserComponent {
 
   onSubmit() {
     if (this.userForm.valid) {
-      console.log('Form Submitted!', this.userForm.value);
+      const newUser: User = this.userForm.value;
+      this.userService.addUser(newUser).subscribe(
+        (user) => {
+          this.userAdded.emit(user);
+          this.userForm.reset();
+          this.closeModal();
+        },
+        (error) => {
+          console.error('Error adding user:', error);
+        }
+      );
     } else {
       this.userForm.markAllAsTouched();
+    }
+  }
+
+  closeModal() {
+    const modalElement = document.getElementById('basicModal');
+    if (modalElement) {
+      modalElement.classList.remove('show');
+      modalElement.setAttribute('aria-hidden', 'true');
+      modalElement.removeAttribute('aria-modal');
+      modalElement.style.display = 'none';
+
+      const backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.remove();
+      }
     }
   }
 }
