@@ -7,15 +7,17 @@ import { User } from '../../../model/user';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule, PaginationInstance } from 'ngx-pagination';
 import { UserDetailComponent } from '../show-user/show-user.component';
+import { UpdateUserComponent } from '../update-user/update-user.component';
+
 @Component({
   selector: 'ssi-sx-manage-user',
   standalone: true,
-  imports: [RouterLink, AddUserComponent, CommonModule, FormsModule,NgxPaginationModule],
+  imports: [RouterLink, AddUserComponent, CommonModule, FormsModule, NgxPaginationModule, UpdateUserComponent],
   templateUrl: './manage-user.component.html',
   styleUrls: ['./manage-user.component.scss']
 })
 export class ManageUserComponent implements OnInit {
-  
+
   users: User[] = [];
   filteredUsers: User[] = [];
   searchTerm: string = '';
@@ -23,7 +25,6 @@ export class ManageUserComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 10;
   selectedUserId?: number;
-
 
   constructor(private userService: UserService) { }
 
@@ -35,7 +36,7 @@ export class ManageUserComponent implements OnInit {
     this.userService.getUsers().subscribe(
       (data: User[]) => {
         this.users = data;
-        this.filterUsers();  
+        this.filterUsers();
       },
       error => {
         console.error('Error fetching users:', error);
@@ -44,13 +45,17 @@ export class ManageUserComponent implements OnInit {
   }
 
   onUserAdded(user: User) {
-    this.loadUsers();  
+    this.loadUsers();
+  }
+
+  onUserUpdated(user: User) {
+    this.loadUsers();
   }
 
   deleteUser(user: User) {
     this.userService.deleteUser(user.id).subscribe(() => {
       this.users = this.users.filter(u => u.id !== user.id);
-      this.filterUsers();  
+      this.filterUsers();
       this.showAlert = true;
       setTimeout(() => this.showAlert = false, 3000);
     }, error => {

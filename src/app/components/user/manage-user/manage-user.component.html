@@ -22,7 +22,7 @@
   </div>
 
   <ssi-sx-add-user class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true" (userAdded)="onUserAdded($event)"></ssi-sx-add-user>
-
+  <ssi-sx-update-user class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true" [userId]="selectedUserId" (userUpdated)="onUserUpdated($event)"></ssi-sx-update-user>
   
 
   <div class="container-xxl flex-grow-1 container-p-y">
@@ -45,7 +45,7 @@
               <td>
                 <div class="d-flex align-items-center">
                   <a [routerLink]="['/manage-users/user-detail', user.id]" class="text-info me-2"><i class="bx bx-show"></i></a>
-                  <a href="javascript:void(0);" class="text-warning me-2"><i class="bx bx-edit-alt"></i></a>
+                  <a href="javascript:void(0);" class="text-warning me-2" data-bs-toggle="modal" data-bs-target="#updateModal" (click)="viewUserDetails(user.id)"><i class="bx bx-edit-alt"></i></a>
                   <a href="javascript:void(0);" class="text-danger" (click)="deleteUser(user)"><i class="bx bx-trash"></i></a>
                 </div>
               </td>
