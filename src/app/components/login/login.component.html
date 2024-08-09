@@ -1,0 +1,55 @@
+<div class="container" class="row justify-content-center ">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+      <div class="authentication-inner" >
+        <!-- Register -->
+        <div class="card">
+          <div class="card-body">
+            <!-- Logo -->
+            <!-- /Logo -->
+            <div class="center-container">
+            <h2 class="mb-2" center-container>Welcome</h2>
+            </div>
+            <p class="mb-4">Please sign-in to your account and start the adventure</p>
+            <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="email" class="form-label"> Username</label>
+                <input type="text" formControlName="emailUsername" class="form-control" id="email"  placeholder="Enter your username" autofocus />
+                <div *ngIf="authForm.get('emailUsername')?.invalid && (authForm.get('emailUsername')?.dirty || authForm.get('emailUsername')?.touched)">
+                  <small class="text-danger" *ngIf="authForm.get('emailUsername')?.errors?.['required']"> Username is required.</small>
+                  <small class="text-danger" *ngIf="authForm.get('emailUsername')?.errors?.['minlength']"> Username must be  at least 5 characters</small>
+
+                </div>
+              </div>
+              <div class="mb-3 form-password-toggle">
+                <div class="d-flex justify-content-between">
+                  <label class="form-label" for="password">Password</label>
+                  <a href="" ><small>Forgot Password?</small></a>
+                </div>
+                <div class="input-group input-group-merge">
+                  <input type="password" formControlName="password" id="password" class="form-control" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
+                  <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                </div>
+                <div *ngIf="authForm.get('password')?.invalid && (authForm.get('password')?.dirty || authForm.get('password')?.touched)">
+                  <small class="text-danger" *ngIf="authForm.get('password')?.errors?.['required']">Password is required.</small>
+                  <small class="text-danger" *ngIf="authForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters.</small>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="form-check">
+                  <input formControlName="rememberMe" class="form-check-input" type="checkbox" id="remember-me" />
+                  <label class="form-check-label" for="remember-me"> Remember Me </label>
+                </div>
+              </div>
+              <div class="mb-3">
+                <button class="btn btn-primary d-grid w-100" type="submit" [disabled]="authForm.invalid">Sign in</button>
+              </div>
+            </form>
+            <p class="text-center"><span>New on our platform?</span> <a href=""><span>Create an account</span></a></p>
+          </div>
+        </div>
+        <!-- /Register -->
+      </div>
+    </div>
+  </div>
+  
+  
