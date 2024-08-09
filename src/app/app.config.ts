@@ -8,6 +8,9 @@ import { provideZoneChangeDetection } from '@angular/core';
 import { AuthGuard } from './guards/auth.guard';
 import { provideClientHydration } from '@angular/platform-browser';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
+
 export function kcFactory(kcService: KeycloakService) {
   return () => kcService.init();
 }
@@ -25,6 +28,14 @@ export const appConfig: ApplicationConfig = {
       useFactory: kcFactory,
       deps: [KeycloakService],
       multi: true
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    provideHttpClient()
+
   ]
+
 };
