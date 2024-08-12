@@ -10,6 +10,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export function kcFactory(kcService: KeycloakService) {
   return () => kcService.init();
@@ -23,6 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     AuthGuard,
     KeycloakService,
+    MatDialogModule,
     {
       provide: APP_INITIALIZER,
       useFactory: kcFactory,
