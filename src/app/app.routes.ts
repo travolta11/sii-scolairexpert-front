@@ -11,6 +11,8 @@ import { ListTeacherComponent } from './components/Teacher/list-teacher/list-tea
 import {StaffListComponent} from "./components/staff/staff-list/staff-list.component";
 
 import { UserDetailComponent } from './components/user/show-user/show-user.component';
+import { StudentComponent } from './components/student/student/student.component';
+import { ParentComponent } from './components/parent/parent/parent.component';
 
 export const routes: Routes = [
     {'path': 'login',  component:LoginComponent },
@@ -23,6 +25,8 @@ export const routes: Routes = [
     {path:'addTeacher',component:AddTeacherComponent},
     {path:'listTeacher',component:ListTeacherComponent},
     {'path': 'staff', 'title': 'StaffList', component: StaffListComponent},
+    {'path': 'student', 'title': 'student', component: StudentComponent},
+    {'path': 'parent', 'title': 'parent', component: ParentComponent},
     //Route example {'path': 'add-student', 'title': 'add', component: AddStudentComponent},
 
 

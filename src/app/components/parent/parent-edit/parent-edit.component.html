@@ -1,0 +1,63 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Edit Parent</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeDialog()"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="parentForm">
+        <div class="row">
+          <div class="mb-3 col-md-6">
+            <label for="cin" class="form-label">CIN <span class="required-asterisk">*</span></label>
+            <input class="form-control" type="text" id="cin" formControlName="cin" required />
+            <div class="text-danger" *ngIf="parentForm.get('cin')!.invalid && (parentForm.get('cin')!.dirty || parentForm.get('cin')!.touched)">
+              <div *ngIf="parentForm.get('cin')!.errors?.['required']">This field is required.</div>
+              <div *ngIf="parentForm.get('cin')!.errors?.['pattern']">Invalid CIN format.</div>
+            </div>
+          </div>          
+          <div class="mb-3 col-md-6">
+            <label for="firstName" class="form-label">First Name <span class="required-asterisk">*</span></label>
+            <input class="form-control" type="text" id="firstName" formControlName="firstName" required />
+            <div class="text-danger" *ngIf="parentForm.controls['firstName'].invalid && (parentForm.controls['firstName'].touched || parentForm.controls['firstName'].dirty)">
+              <div *ngIf="parentForm.controls['firstName'].errors?.['required']">This field is required.</div>
+              <div *ngIf="parentForm.controls['firstName'].errors?.['pattern']">Invalid format. Only letters are allowed.</div>
+            </div>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="lastName" class="form-label">Last Name <span class="required-asterisk">*</span></label>
+            <input class="form-control" type="text" id="lastName" formControlName="lastName" required />
+            <div class="text-danger" *ngIf="parentForm.controls['lastName'].invalid && (parentForm.controls['lastName'].touched || parentForm.controls['lastName'].dirty)">
+              <div *ngIf="parentForm.controls['lastName'].errors?.['required']">This field is required.</div>
+              <div *ngIf="parentForm.controls['lastName'].errors?.['pattern']">Invalid format. Only letters are allowed.</div>
+            </div>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="email" class="form-label">E-mail <span class="required-asterisk">*</span></label>
+            <input class="form-control" type="text" id="email" formControlName="email" required />
+            <div class="text-danger" *ngIf="parentForm.controls['email'].invalid && (parentForm.controls['email'].touched || parentForm.controls['email'].dirty)">
+              <div *ngIf="parentForm.controls['email'].errors?.['required']">This field is required.</div>
+              <div *ngIf="parentForm.controls['email'].errors?.['email']">Invalid email format.</div>
+            </div>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label class="form-label" for="phone">Phone Number</label>
+            <div class="input-group input-group-merge">
+              <span class="input-group-text">+212</span>
+              <input type="text" id="phone" formControlName="phone" class="form-control" />
+              <div class="text-danger" *ngIf="parentForm.controls['phone'].invalid && (parentForm.controls['phone'].touched || parentForm.controls['phone'].dirty)">
+                <div *ngIf="parentForm.controls['phone'].errors?.['pattern']">Invalid format. Only 10 digits are allowed.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" (click)="closeDialog()">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+            Save changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
