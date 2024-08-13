@@ -17,6 +17,8 @@ import { ParentFormComponent } from '../../parent/parent-form/parent-form.compon
 })
 export class StudentFormComponent implements OnInit {
   @Output() studentAdded = new EventEmitter<void>();
+  emailExistsMessage: string = '';
+  phoneExistsMessage: string = '';
   
   studentForm!: FormGroup;
   genders = Gender;
@@ -54,6 +56,10 @@ export class StudentFormComponent implements OnInit {
   onSubmit(): void {
     if (this.studentForm.valid) {
       const cin = this.studentForm.get('cin')?.value;
+      const email = this.studentForm.get('email')?.value;
+      const phone = this.studentForm.get('phoneNumber')?.value;
+      this.checkEmailExists(email, () => {
+        this.checkPhoneExists(phone, () => {
       this.parentService.getParentByCin(cin).subscribe(parent => {
         if (parent) {
           this.studentForm.get('parentId')?.setValue(parent.id);
@@ -68,9 +74,32 @@ export class StudentFormComponent implements OnInit {
         console.error('Error fetching parent by CIN', error);
         this.parentNotFound = true;
       });
-    } else {
+    } );
+  });}else {
       this.studentForm.markAllAsTouched();
     }
+  }
+
+  private checkEmailExists(email: string, onSuccess: () => void): void {
+    this.studentService.checkEmailExists(email).subscribe(exists => {
+      if (exists) {
+        this.emailExistsMessage = 'Email already exists.';
+      } else {
+        this.emailExistsMessage = '';
+        onSuccess();
+      }
+    });
+  }
+
+  private checkPhoneExists(phone: string, onSuccess: () => void): void {
+    this.studentService.checkPhoneExists(phone).subscribe(exists => {
+      if (exists) {
+        this.phoneExistsMessage = 'Phone number already exists.';
+      } else {
+        this.phoneExistsMessage = '';
+        onSuccess();
+      }
+    });
   }
 
   closeDialog(): void {
