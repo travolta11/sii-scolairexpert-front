@@ -1,10 +1,19 @@
-<div class="card class-global" style="padding-bottom: 100px;">
+<div class="card class-global" >
   <div class="d-flex justify-content-between align-items-center mb-2 sub-container">
-    <div class="col-auto">
+    <div class="col-auto manage" >
       <h6 class="card-header mb-0 small-header">Class Management</h6>
     </div>
+    <div class="input-group input-group-merge custom-width" >
+      <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search small-icon"></i></span>
+      <input
+        type="text"
+        class="form-control small-placeholder "
+        placeholder="Search..."
+        [(ngModel)]="searchTerm" (ngModelChange)="applyFilter()"
+      />
+    </div>
     <div class="col text-end">
-      <button type="button" class="btn text-white add" style="background-color: #696CFF;" (click)="openAddClassDialog()">Add New Class</button>
+      <button type="button" class="btn text-white add"  (click)="openAddClassDialog()">Add</button>
     </div>
   </div>
 </div>
@@ -12,7 +21,7 @@
 <div class="card class">
   <div class="table-responsive text-nowrap">
     <table class="table">
-      <thead style="background-color: #32475C1F;">
+      <thead >
         <tr>
           <th>Class Name</th>
           <th>Students</th>
@@ -23,16 +32,16 @@
         </tr>
       </thead>
       <tbody class="table-border-bottom-0">
-        <tr *ngFor="let classItem of classes">
-          <td><strong>{{ classItem.name }}</strong></td>
-          <td>{{ classItem.students }}</td>
+        <tr *ngFor="let classItem of paginatedClasses">
+          <td [innerHTML]="highlightSearch(classItem.name)"></td>
+          <td>{{ classItem.nbOfStudents }}</td>
           <td><button class="btn"><i class="bx bx-show"></i></button></td>
           <td><button class="btn"><i class="bx bx-show"></i></button></td>
           <td><button class="btn"><i class="bx bx-calendar bx-tada"></i></button></td>
           <td>
             <div class="d-flex align-items-center">
               <button class="btn" (click)="openEditClassDialog(classItem)"><i class="bx bx-edit-alt"></i></button>
-              <button class="btn"><i class="bx bx-trash"></i></button>
+              <button class="btn" (click)="deleteClass(classItem.id)"><i class="bx bx-trash"></i></button>
             </div>
           </td>
         </tr>
@@ -40,25 +49,9 @@
     </table>
   </div>
 </div>
-
-<nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
-  <ul class="pagination">
-    <li class="page-item first">
-      <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevrons-left"></i></a>
-    </li>
-    <li class="page-item prev">
-      <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevron-left"></i></a>
-    </li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-    <li class="page-item active"><a class="page-link" href="javascript:void(0);">3</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
-    <li class="page-item next">
-      <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevron-right"></i></a>
-    </li>
-    <li class="page-item last">
-      <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevrons-right"></i></a>
-    </li>
-  </ul>
+<nav class="paginator-nav">
+  <mat-paginator [length]="filteredClasses.length"
+                 [pageSize]="5"
+                 (page)="onPageChange($event)">
+  </mat-paginator>
 </nav>

@@ -26,28 +26,73 @@
     .add{
       background-color: #696CFF;
     }
-    @media only screen and (max-width: 600px) {
+
+    .custom-width{
+      width: 200px;
+      margin-left: 100px;
+    }
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+    }
+
+    .paginator-nav {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem; /* Optional: Adds some space above the paginator */
+    }
+    thead{
+      background-color: #32475C1F;
+    }
+    @media only screen and (max-width:
+     600px) {
 
     .class-global{
       padding: initial;
       height: initial; 
-       margin-bottom: -20px;
+      margin-bottom: -20px;
       max-height: 40px;
+      padding-bottom: 100px;
+     
     }
+
     .add{
-      padding: 10px;
-      margin-right: 20px;
-      font-size: 11px; 
+      padding: 5px;
+       margin-right: 10px;
+      font-size: 12px; 
     }
+
    .card-header {
       font-size: 14px; 
       line-height: 1.2; 
     margin-left: 0px;
     }
+
     .table {
       table-layout: initial;
       width: initial;
     }
     
-
+    .custom-width{
+      width: initial;
+      max-width: 150px; /* Max width */
+      min-width: 90px; /* Min width */
+      height: auto;
+      font-size: 10px;
+      margin-left: initial;
+      
     }
+    .small-placeholder::placeholder {
+      font-size: 12px;  
+    }
+    .small-placeholder {
+      font-size: 12px;  
+      margin-right: 10px;
+    }
+    .small-icon {
+      font-size: 12px;  
+    }
+    .small-header{
+      font-size: 12px;
+    }
+  }
