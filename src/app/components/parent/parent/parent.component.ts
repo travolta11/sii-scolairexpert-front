@@ -6,12 +6,13 @@ import { Parent } from '../../../models/parent/parent';
 import { ParentEditComponent } from '../parent-edit/parent-edit.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ParentFormComponent } from '../parent-form/parent-form.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'ssi-sx-parent',
   templateUrl: './parent.component.html',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule,FormsModule],
   styleUrls: ['./parent.component.scss']
 })
 export class ParentComponent implements OnInit {
@@ -20,6 +21,8 @@ export class ParentComponent implements OnInit {
   currentPage = 0;
   totalPages = 0;
   pageSize = 10;
+  searchTerm: string = '';
+  filteredParent: Parent[] = [];
 
   constructor(private parentService: ParentService, private dialog: MatDialog) {}
 
@@ -31,6 +34,7 @@ export class ParentComponent implements OnInit {
     this.parentService.getParents(page, this.pageSize).subscribe(response => {
       if (response && response.content) {
         this.parents = response.content;
+        this.filteredParent = this.parents;
         this.totalPages = response.totalPages;
         this.currentPage = page;
       }
@@ -70,5 +74,23 @@ export class ParentComponent implements OnInit {
     }).afterClosed().subscribe(() => {
       this.loadParents(this.currentPage);
     });
+  }
+
+  applyFilter(): void {
+    if (this.searchTerm) {
+      this.filteredParent = this.parents.filter(parentItem =>
+        parentItem.cin.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      this.filteredParent = this.parents;
+    }
+  }  
+
+  highlightSearch(text: string): string {
+    if (!this.searchTerm) {
+      return text;
+    }
+    const searchTermRegex = new RegExp(`(${this.searchTerm})`, 'gi');
+    return text.replace(searchTermRegex, '<span class="highlight">$1</span>');
   }
 }

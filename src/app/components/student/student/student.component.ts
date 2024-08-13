@@ -7,12 +7,14 @@ import { EditStudentComponent } from '../StudentEdit/edit-student.component';
 import { Student } from '../../../models/student/student';
 import { StudentService } from '../../../services/student/student.service';
 import { StudentFormComponent } from '../student-form/student-form.component';
+import { ClassServiceService } from '../../../services/class/class-service.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'ssi-sx-student',
   templateUrl: './student.component.html',
   standalone: true,
-  imports: [RouterModule, CommonModule, StudentDetailsComponent,StudentFormComponent],
+  imports: [RouterModule, CommonModule, StudentDetailsComponent,StudentFormComponent,FormsModule],
   styleUrls: ['./student.component.scss']
 })
 export class StudentComponent implements OnInit {
@@ -21,8 +23,10 @@ export class StudentComponent implements OnInit {
   currentPage = 0;
   totalPages = 0;
   pageSize = 10;
+  searchTerm: string = '';
+  filteredStudent: Student[] = [];
 
-  constructor(private studentService: StudentService, private dialog: MatDialog) {}
+  constructor(private studentService: StudentService, private dialog: MatDialog,private classService: ClassServiceService) {}
 
   ngOnInit(): void {
     this.loadStudents(this.currentPage);
@@ -32,8 +36,14 @@ export class StudentComponent implements OnInit {
     this.studentService.getStudents(page, this.pageSize).subscribe(response => {
       if (response && response.content) {
         this.students = response.content;
+        this.filteredStudent = this.students;
         this.totalPages = response.totalPages;
         this.currentPage = page;
+        this.students.forEach(student => {
+          this.classService.getClassById(student.classId).subscribe(classData => {
+            student.className = classData.name;
+          });
+        });
       } 
     });
   }
@@ -78,5 +88,23 @@ export class StudentComponent implements OnInit {
     }).afterClosed().subscribe(() => {
       this.loadStudents(this.currentPage);
     });
+  }
+
+  applyFilter(): void {
+    if (this.searchTerm) {
+      this.filteredStudent = this.students.filter(studentItem =>
+        studentItem.lastName.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      this.filteredStudent = this.students;
+    }
+  }  
+
+  highlightSearch(text: string): string {
+    if (!this.searchTerm) {
+      return text;
+    }
+    const searchTermRegex = new RegExp(`(${this.searchTerm})`, 'gi');
+    return text.replace(searchTermRegex, '<span class="highlight">$1</span>');
   }
 }

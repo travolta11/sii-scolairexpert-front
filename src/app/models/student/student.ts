@@ -8,7 +8,8 @@ export class Student {
     zipCode: string;
     gender: string;
     level: string;
-    classe: string;
+    classId: number;
+    className?: string;
     dateOfBirth:Date;
     parentId: number;
 
@@ -23,7 +24,7 @@ export class Student {
       zipCode: string,
       gender: string,
       level: string,
-      classe: string,
+      classId: number,
       dateOfBirth:Date,
       parentId: number
     ) {
@@ -36,7 +37,7 @@ export class Student {
       this.zipCode = zipCode;
       this.gender = gender;
       this.level = level;
-      this.classe = classe;
+      this.classId = classId;
       this.dateOfBirth = dateOfBirth;
       this.parentId = parentId;
     }

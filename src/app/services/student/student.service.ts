@@ -24,6 +24,7 @@ export class StudentService {
   }
 
   addStudent(student: Student): Observable<Student> {
+    console.log("Student being added: ", student);
     return this.http.post<Student>(this.apiUrl, student);
   }
 
