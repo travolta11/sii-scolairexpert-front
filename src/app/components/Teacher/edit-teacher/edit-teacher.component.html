@@ -1,0 +1,32 @@
+<div class="modal-dialog modal-dialog-centered container" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Teacher</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name</label>
+            <input type="text" id="fullName" class="form-control" formControlName="fullName">
+            <div *ngIf="userForm.controls['fullName'].invalid && isFormSubmitted" class="text-danger">Full Name is required</div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" class="form-control" formControlName="email">
+            <div *ngIf="userForm.controls['email'].invalid && isFormSubmitted" class="text-danger">Valid Email is required</div>
+          </div>
+          <div class="mb-3">
+            <label for="phoneNo" class="form-label">Phone Number</label>
+            <input type="text" id="phoneNo" class="form-control" formControlName="phoneNo">
+            <div *ngIf="userForm.controls['phoneNo'].invalid && isFormSubmitted" class="text-danger">Phone Number is required</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close" >Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
