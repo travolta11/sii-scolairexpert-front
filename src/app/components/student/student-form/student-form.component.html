@@ -60,6 +60,7 @@
             <div *ngIf="studentForm.get('email')?.errors?.['required']">This field is required.</div>
             <div *ngIf="studentForm.get('email')?.errors?.['email']">Invalid email format.</div>
           </div>
+          <div class="text-danger" *ngIf="emailExistsMessage">{{ emailExistsMessage }}</div>
         </div>
         <div class="mb-3 col-md-6">
           <label class="form-label" for="phoneNumber">Phone Number</label>
@@ -70,6 +71,7 @@
               <div *ngIf="studentForm.get('phoneNumber')?.errors?.['pattern']">Invalid format. Only 10 digits are allowed.</div>
             </div>
           </div>
+          <div class="text-danger" *ngIf="phoneExistsMessage">{{ phoneExistsMessage }}</div>
         </div>
         <div class="mb-3 col-md-6">
           <label for="address" class="form-label">Address <span class="required-asterisk">*</span></label>
