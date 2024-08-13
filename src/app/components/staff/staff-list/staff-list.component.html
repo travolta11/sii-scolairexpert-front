@@ -1,0 +1,50 @@
+<div class="card p-3 m-3">
+  <div class="d-flex align-items-baseline">
+    <h5 class="card-header">Staff Management</h5>
+    <div class="col text-end">
+      <button  type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#basicModal">Add Staff Member</button>
+    </div>
+  </div>
+
+  <ssi-sx-add-staff class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true"></ssi-sx-add-staff>
+  <ssi-sx-edit-staff  class="modal fade" id="editModal" tabindex="-1" aria-hidden="true"></ssi-sx-edit-staff>
+  <div class="table-responsive text-nowrap">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody class="table-border-bottom-0">
+      <tr *ngFor="let member of visibleData">
+        <td>{{member.firstName}} </td>
+        <td>{{member.lastName}}</td>
+        <td>{{member.phone}}</td>
+        <td> {{member.email}}</td>
+        <td>
+          <div class="d-flex align-items-center">
+            <button class="btn "  data-bs-toggle="modal" data-bs-target="#editModal" (click)="editStaff(member)" ><i class="bx bx-edit-alt"></i></button>
+            <button class="btn text-danger" (click)="deleteStaffMember(member.id)" ><i class="bx bx-trash"></i></button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
+  <ul class="pagination">
+    <li class="page-item first">
+      <a class="page-link"  (click)="prevPage()"><i class="tf-icon bx bx-chevrons-left"></i></a>
+    </li>
+    <li class="page-item"><a class="page-link" >{{currentPage}}</a></li>
+    <li class="page-item next">
+      <a class="page-link"  (click)="nextPage()"><i class="tf-icon bx bx-chevrons-right"></i></a>
+    </li>
+  </ul>
+</nav>
+
