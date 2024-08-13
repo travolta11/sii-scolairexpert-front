@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { AddClassComponent } from './components/class-management/add-class/add-class.component';
+import { ClasseComponent } from './components/class-management/class/class.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 
@@ -21,6 +23,7 @@ export const routes: Routes = [
     {'path': 'manage-users', 'title': 'User Management', component: ManageUserComponent},
     {'path': 'add-user', 'title': 'Add User', component: AddUserComponent},
     { path: 'manage-users/user-detail/:id', component: UserDetailComponent },
+    {'path': 'class',  component:ClasseComponent },
     // Route example: { path: 'add-student', title: 'Add', component: AddStudentComponent },
     {path:'addTeacher',component:AddTeacherComponent},
     {path:'listTeacher',component:ListTeacherComponent},
