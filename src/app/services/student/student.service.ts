@@ -26,4 +26,12 @@ export class StudentService {
   addStudent(student: Student): Observable<Student> {
     return this.http.post<Student>(this.apiUrl, student);
   }
+
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/check-email-exists/${email}`);
+  }
+
+  checkPhoneExists(phone_number: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/check-phone-exists/${phone_number}`);
+  }
 }
