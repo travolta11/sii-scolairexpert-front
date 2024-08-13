@@ -1,7 +1,18 @@
 <div class="card mx-3 my-3">
   <div class="container d-flex justify-content-between align-items-center mb-3">
     <h5 class="card-header">Parents</h5>
-    <button type="button" class="btn btn-primary" (click)="openInscriptionModal()">Nouveau</button>
+    <div class="mb-0">
+      <div class="input-group input-group-merge custom-width" >
+        <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search small-icon"></i></span>
+        <input
+          type="text"
+          class="form-control small-placeholder "
+          placeholder="Search..."
+          [(ngModel)]="searchTerm" (ngModelChange)="applyFilter()"
+        />
+      </div>
+    </div>
+    <button type="button" class="btn btn-outline-primary" (click)="openInscriptionModal()">Nouveau</button>
   </div>
   <div class="table-responsive text-nowrap">
     <table class="table">
@@ -16,8 +27,8 @@
         </tr>
       </thead>
       <tbody class="table-border-bottom-0">
-        <tr *ngFor="let parent of parents">
-          <td>{{ parent.cin }}</td>
+        <tr *ngFor="let parent of filteredParent">
+          <td [innerHTML]="highlightSearch( parent.cin )"></td>
           <td>{{ parent.lastName }}</td>
           <td>{{ parent.firstName }}</td>
           <td>{{ parent.phone }}</td>

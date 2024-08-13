@@ -107,29 +107,30 @@
           </div>
         </div>
         <div class="mb-3 col-md-6">
-          <label for="classe" class="form-label">Classe <span class="required-asterisk">*</span></label>
-          <select id="classe" class="select2 form-select" formControlName="classe" required>
+          <label for="classId" class="form-label">Classe <span class="required-asterisk">*</span></label>
+          <select id="classId" class="select2 form-select" formControlName="classId" required>
             <option value="">Select Classe</option>
-            <option value="1">Classe 1</option>
-            <option value="2">Classe 2</option>
-            <option value="2">Classe 3</option>
+            <option *ngFor="let classe of classes" [value]="classe.id">{{ classe.name }}</option>
           </select>
           <div class="text-danger" *ngIf="studentForm.get('classe')?.invalid && (studentForm.get('classe')?.dirty || studentForm.get('classe')?.touched)">
             <div *ngIf="studentForm.get('classe')?.errors?.['required']">This field is required.</div>
           </div>
-        </div>
+        </div>        
         <div class="mb-3 col-md-6">
           <label for="cin" class="form-label">CIN <span class="required-asterisk">*</span></label>
           <input class="form-control" type="text" id="cin" formControlName="cin" required />
-          <div class="text-center mt-2">
-            <button type="button" class="btn btn-outline-success" (click)="openDialog()">Add New Parent</button>
-          </div>
           <div class="text-danger" *ngIf="studentForm.controls['cin']?.invalid && (studentForm.controls['cin']?.dirty || studentForm.controls['cin']?.touched)">
             <div *ngIf="studentForm.controls['cin']?.errors?.['required']">This field is required.</div>
           </div>
           <div class="text-danger" *ngIf="parentNotFound">
             Parent with the given CIN does not exist. Please check the CIN or create a new parent.
           </div>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="cin" class="form-label"></label>
+        <div class="text-center mt-2">
+          <button type="button" class="btn btn-outline-success" (click)="openDialog()">Add New Parent</button>
+        </div>
         </div>
       </div>
         <div class="modal-footer">

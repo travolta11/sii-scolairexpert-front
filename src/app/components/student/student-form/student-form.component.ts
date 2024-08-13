@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { Gender } from '../../../enum/gender.enum';
 import { Level } from '../../../enum/level.enum';
 import { ParentFormComponent } from '../../parent/parent-form/parent-form.component';
+import { ClassServiceService } from '../../../services/class/class-service.service';
+import { Class } from '../../../model/class';
 
 @Component({
   selector: 'ssi-sx-student-form',
@@ -19,6 +21,7 @@ export class StudentFormComponent implements OnInit {
   @Output() studentAdded = new EventEmitter<void>();
   emailExistsMessage: string = '';
   phoneExistsMessage: string = '';
+  classes: Class[] = [];
   
   studentForm!: FormGroup;
   genders = Gender;
@@ -31,10 +34,14 @@ export class StudentFormComponent implements OnInit {
     private dialogRef: MatDialogRef<StudentFormComponent>,
     private parentService: ParentService,
     private studentService: StudentService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private classService: ClassServiceService
   ) {}
 
   ngOnInit(): void {
+    this.classService.getAllClasses().subscribe(classes => {
+      this.classes = classes;
+    });
     this.studentForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
       lastName: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
@@ -45,7 +52,7 @@ export class StudentFormComponent implements OnInit {
       dateOfBirth: [''],
       gender: ['', Validators.required],
       level: ['', Validators.required],
-      classe: ['', Validators.required],
+      classId: ['', Validators.required],
       cin: ['', Validators.required] ,
       parentId: ['']
     });
