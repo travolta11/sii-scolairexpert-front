@@ -51,7 +51,9 @@
 </div>
 <nav class="paginator-nav">
   <mat-paginator [length]="filteredClasses.length"
-                 [pageSize]="5"
-                 (page)="onPageChange($event)">
+                  [pageSize]="5"
+                  [pageSizeOptions]="[5, 10]"
+                  aria-label="Select page"
+                  (page)="onPageChange($event)">
   </mat-paginator>
 </nav>
