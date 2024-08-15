@@ -1,4 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { KeycloakService } from './services/keycloak/keycloak.service';
@@ -16,6 +17,7 @@ export function kcFactory(kcService: KeycloakService) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimationsAsync(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),

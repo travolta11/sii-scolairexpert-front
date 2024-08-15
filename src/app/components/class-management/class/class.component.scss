@@ -1,9 +1,11 @@
 
   .class{
+   
     margin-left: 50pX;
     margin-right: 50pX;
   }
   .class-global{
+    
     margin-left: 50pX;
     margin-right: 50pX;
     margin-bottom: 5px;
@@ -39,11 +41,13 @@
     .paginator-nav {
       display: flex;
       justify-content: center;
-      margin-top: 1rem; /* Optional: Adds some space above the paginator */
+      margin-top: 1rem; 
+      margin-bottom: 50 px;
     }
     thead{
       background-color: #32475C1F;
     }
+    
     @media only screen and (max-width:
      600px) {
 

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import {Dialog,DialogModule} from '@angular/cdk/dialog';
+import {DialogModule} from '@angular/cdk/dialog';
 import { AddClassComponent } from '../add-class/add-class.component';
 import { FormsModule } from '@angular/forms';
 import { EditClassComponent } from '../edit-class/edit-class.component';
@@ -32,22 +32,13 @@ export class ClasseComponent implements OnInit {
     this.getClasses();
   }
 
-  paginateClasses(): void {
-    const startIndex = this.paginator!.pageIndex * this.paginator!.pageSize;
-    this.paginatedClasses = this.filteredClasses.slice(startIndex, startIndex + this.paginator!.pageSize);
-  }
-
-  onPageChange(event: PageEvent): void {
-    this.paginateClasses();
-  }
-
   // Get all classes
   getClasses(): void {
     this.classService.getAllClasses().subscribe(
       (data) => {
         this.classes = data;
         this.filteredClasses = data;
-        this.paginateClasses(); // Apply pagination after fetching classes
+        this.paginateClasses(); 
       },
       (error) => {
         console.error('Error fetching classes:', error);
@@ -59,7 +50,7 @@ export class ClasseComponent implements OnInit {
   deleteClass(classId: number): void {
     this.classService.deleteClass(classId).subscribe(
       () => {
-        this.getClasses(); // Refresh the classes list after deletion
+        this.getClasses(); 
         this.dialog.open(SuccessDialogComponent, {
           width: '300px',
           data: {
@@ -110,7 +101,10 @@ export class ClasseComponent implements OnInit {
     } else {
       this.filteredClasses = this.classes;
     }
-    this.paginateClasses(); // Apply pagination after filtering
+    if (this.paginator) {
+      this.paginator.firstPage();
+    }
+    this.paginateClasses(); 
   }
 
   highlightSearch(text: string): string {
@@ -120,4 +114,15 @@ export class ClasseComponent implements OnInit {
     const searchTermRegex = new RegExp(`(${this.searchTerm})`, 'gi');
     return text.replace(searchTermRegex, '<span class="highlight">$1</span>');
   }
+
+  paginateClasses(): void {
+    const startIndex = this.paginator!.pageIndex * this.paginator!.pageSize;
+    this.paginatedClasses = this.filteredClasses.slice(startIndex, startIndex + this.paginator!.pageSize);
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.paginateClasses();
+  }
+
+  
 }
