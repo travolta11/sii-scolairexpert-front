@@ -35,4 +35,8 @@ export class StudentService {
   checkPhoneExists(phone_number: string): Observable<boolean> {
     return this.http.get<boolean>(`${this.apiUrl}/check-phone-exists/${phone_number}`);
   }
+
+  getStudentsByClassId(classId: number): Observable<Student[]> {
+    return this.http.get<Student[]>(`${this.apiUrl}/class/${classId}`);
+  }
 }
