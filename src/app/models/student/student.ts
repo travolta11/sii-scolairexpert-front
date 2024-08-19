@@ -12,7 +12,12 @@ export class Student {
     className?: string;
     dateOfBirth:Date;
     parentId: number;
-
+    absenceChecked?: boolean;
+    absenceDisabled?: boolean;
+    tardinessChecked?: boolean;
+    tardinessDisabled?: boolean;
+    absenceReason?: string;
+    tardinessReason?: string;
   
     constructor(
       id: number,
