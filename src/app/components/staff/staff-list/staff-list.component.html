@@ -1,9 +1,19 @@
-<div class="card p-3 m-3">
-  <div class="d-flex align-items-baseline">
-    <h5 class="card-header">Staff Management</h5>
-    <div class="col text-end">
-      <button  type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#basicModal">Add Staff Member</button>
+<div class="card p-3 m-3 ">
+  <div class="container d-flex justify-content-between align-items-center mb-3">
+    <h5 class="card-header mb-0">Staff Management</h5>
+    <div class="mb-0">
+      <div class="input-group input-group-merge custom-width" >
+        <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search small-icon"></i></span>
+        <input
+          type="text"
+          class="form-control small-placeholder "
+          placeholder="Search..."
+          (input)="onSearchTermChange($event)"
+
+        />
+      </div>
     </div>
+    <button  type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#basicModal">Add Staff Member</button>
   </div>
 
   <ssi-sx-add-staff class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true"></ssi-sx-add-staff>

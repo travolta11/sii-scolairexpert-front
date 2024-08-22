@@ -5,6 +5,7 @@ import {StaffService} from "../../../services/staff.service";
 import {Staff} from "../../../models/Staff.model";
 import {HttpClient} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
+import {FormControl} from "@angular/forms";
 @Component({
   selector: 'ssi-sx-staff-list',
   standalone: true,
@@ -19,6 +20,22 @@ export class StaffListComponent implements OnInit{
   currentPage: number = 1;
   itemsPerPage: number = 10;
   staffMembers : Staff[]=[];
+  searchValue: string ='';
+  filteredStaffMembers: Staff[] = [];
+
+  updateVisibleData() {
+    this.filteredStaffMembers = this.staffMembers.filter(member =>
+      member.firstName.toLowerCase().includes(this.searchValue.toLowerCase()) ||
+      member.lastName.toLowerCase().includes(this.searchValue.toLowerCase()) );
+
+  }
+  onSearchTermChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const searchValue = target?.value || '';
+    this.searchValue = searchValue;
+    this.currentPage = 1;
+    this.updateVisibleData();
+  }
 
 
   constructor(private staffService: StaffService) { }
@@ -27,6 +44,7 @@ export class StaffListComponent implements OnInit{
     // this.loadStaffMembers();
     this.staffService.staffMembers$.subscribe(data => {
       this.staffMembers = data;
+      this.filteredStaffMembers=data;
     });
     console.log(this.staffMembers)
   }
@@ -50,7 +68,7 @@ export class StaffListComponent implements OnInit{
   get visibleData(): any[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    return this.staffMembers.slice(startIndex, endIndex);
+    return this.filteredStaffMembers.slice(startIndex, endIndex);
   }
 
   goToPage(page: number): void {
