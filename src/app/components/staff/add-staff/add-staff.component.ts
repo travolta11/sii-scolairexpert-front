@@ -3,7 +3,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {CommonModule} from "@angular/common";
 import {Staff} from "../../../models/Staff.model";
 import {StaffDto} from "../../../models/StaffDto.model";
-import {StaffService} from "../../../services/staff.service";
+import {StaffService} from "../../../services/staff/staff.service";
 
 @Component({
   selector: 'ssi-sx-add-staff',

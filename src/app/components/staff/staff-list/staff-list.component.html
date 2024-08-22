@@ -18,6 +18,7 @@
 
   <ssi-sx-add-staff class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true"></ssi-sx-add-staff>
   <ssi-sx-edit-staff  class="modal fade" id="editModal" tabindex="-1" aria-hidden="true"></ssi-sx-edit-staff>
+  <ssi-sx-show-staff class="modal fade" id="viewStaffMember" tabindex="-1" [memberId]="selectedMemberId"></ssi-sx-show-staff>
   <div class="table-responsive text-nowrap">
     <table class="table">
       <thead>
@@ -39,6 +40,7 @@
           <div class="d-flex align-items-center">
             <button class="btn "  data-bs-toggle="modal" data-bs-target="#editModal" (click)="editStaff(member)" ><i class="bx bx-edit-alt"></i></button>
             <button class="btn text-danger" (click)="deleteStaffMember(member.id)" ><i class="bx bx-trash"></i></button>
+            <button class="btn text-secondary" data-bs-toggle="modal" data-bs-target="#viewStaffMember"  (click)="showMember(member)" ><i class="bx bx-show"></i></button>
           </div>
         </td>
       </tr>
