@@ -33,7 +33,7 @@
     "keycloak-angular": "^16.0.1",
     "keycloak-js": "^25.0.2",
     "masonry-layout": "4.2.1",
-    "ngx-pagination": "^6.0.3",,
+    "ngx-pagination": "^6.0.3",
     "perfect-scrollbar": "1.5.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
