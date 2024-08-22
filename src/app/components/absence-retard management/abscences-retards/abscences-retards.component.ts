@@ -3,7 +3,7 @@ import { ClassServiceService } from '../../../services/class/class-service.servi
 import { Class } from '../../../model/class';
 import { StudentService } from '../../../services/student/student.service';
 import { Student } from '../../../models/student/student';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AbsenceService } from '../../../services/absence/absence.service';
 import { RetardService } from '../../../services/retard/retard.service';
@@ -16,7 +16,7 @@ import {DetailsDialogComponentComponent} from '../details-dialog-component/detai
 @Component({
   selector: 'ssi-sx-abscences-retards',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, MatDialogModule],
+  imports: [ReactiveFormsModule, CommonModule, MatDialogModule,FormsModule],
   templateUrl: './abscences-retards.component.html',
   styleUrls: ['./abscences-retards.component.scss']
 })
@@ -30,9 +30,11 @@ export class AbscencesRetardsComponent implements OnInit {
   students: Student[] = [];
   paginatedStudents: Student[] = [];
 
-  // Store checked states
   checkedAbsences: { [studentId: number]: boolean } = {};
   checkedTardiness: { [studentId: number]: boolean } = {};
+
+  filteredStudents: Student[] = []; 
+  searchTerm: string = '';
 
   constructor(
     private classService: ClassServiceService,
@@ -59,6 +61,7 @@ export class AbscencesRetardsComponent implements OnInit {
       if (classId) {
         this.studentService.getStudentsByClassId(classId).subscribe(students => {
           this.students = students;
+          this.filterStudents();
           this.totalPages = Math.ceil(students.length / this.pageSize);
           this.updatePaginatedStudents();
         });
@@ -100,13 +103,18 @@ export class AbscencesRetardsComponent implements OnInit {
       }
     });
   }
+  filterStudents(): void {
+    this.filteredStudents = this.students.filter(student =>
+      `${student.firstName} ${student.lastName}`.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    this.updatePaginatedStudents();
+  }
 
   updatePaginatedStudents(): void {
     const start = this.currentPage * this.pageSize;
     const end = start + this.pageSize;
-    this.paginatedStudents = this.students.slice(start, end);
+    this.paginatedStudents = this.filteredStudents.slice(start, end);
 
-    // Restore checked states from stored values and disable checkboxes
     this.paginatedStudents.forEach(student => {
       student.absenceChecked = this.checkedAbsences[student.id] || false;
       student.absenceDisabled = !!this.checkedAbsences[student.id];
@@ -120,8 +128,8 @@ export class AbscencesRetardsComponent implements OnInit {
       data: { 
         studentId: student.id, 
         date: this.form.get('date')?.value,
-        absenceChecked: this.checkedAbsences[student.id] || false,
-        retardChecked: this.checkedTardiness[student.id] || false
+        absenceChecked: student.absenceDisabled || false,
+        retardChecked: student.tardinessDisabled || false
       }
     });
   
@@ -132,16 +140,29 @@ export class AbscencesRetardsComponent implements OnInit {
   
 
   toggleAbsence(studentId: number): void {
-    if (!this.checkedAbsences[studentId]) {
-      this.checkedAbsences[studentId] = !this.checkedAbsences[studentId];
-    }
+    this.checkedAbsences[studentId] = !this.checkedAbsences[studentId];
+    this.updateStudentAbsenceStatus(studentId);
   }
-
+  
   toggleTardiness(studentId: number): void {
-    if (!this.checkedTardiness[studentId]) {
-      this.checkedTardiness[studentId] = !this.checkedTardiness[studentId];
+    this.checkedTardiness[studentId] = !this.checkedTardiness[studentId];
+    this.updateStudentTardinessStatus(studentId);
+  }
+  
+  updateStudentAbsenceStatus(studentId: number): void {
+    const student = this.students.find(student => student.id === studentId);
+    if (student) {
+      student.absenceChecked = this.checkedAbsences[studentId];
     }
   }
+  
+  updateStudentTardinessStatus(studentId: number): void {
+    const student = this.students.find(student => student.id === studentId);
+    if (student) {
+      student.tardinessChecked = this.checkedTardiness[studentId];
+    }
+  }
+  
 
   prevPage(): void {
     if (this.currentPage > 0) {
@@ -169,6 +190,13 @@ export class AbscencesRetardsComponent implements OnInit {
   }
 
   onSubmit(): void {
+    // Mettre à jour les états des cases à cocher
+    this.paginatedStudents.forEach(student => {
+      this.updateStudentAbsenceStatus(student.id);
+      this.updateStudentTardinessStatus(student.id);
+    });
+  
+    // Le reste de votre code de soumission...
     const date = this.form.get('date')?.value;
     let submissionSuccess = true;
   
@@ -185,7 +213,7 @@ export class AbscencesRetardsComponent implements OnInit {
           const absence = {
             studentId: student.id,
             date: date,
-            reason: student.absenceReason || 'Absence'
+            reason: 'Absence non justifier'
           };
           this.absenceService.addAbsence(absence).subscribe({
             error: () => submissionSuccess = false
@@ -196,7 +224,7 @@ export class AbscencesRetardsComponent implements OnInit {
           const retard = {
             studentId: student.id,
             date: date,
-            reason: student.tardinessReason || 'Retard'
+            reason: 'Retard non justifier'
           };
           this.retardService.addRetard(retard).subscribe({
             error: () => submissionSuccess = false
@@ -216,6 +244,8 @@ export class AbscencesRetardsComponent implements OnInit {
       this.alertMessage = null;
     }, 3000);
   }
+  
+  
   
 
   resetNewCheckedStates(): void {

@@ -30,7 +30,7 @@ export class ParentFormComponent implements OnInit{
       firstName: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
       lastName: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      phone: ['', [Validators.required]],
       cin: ['', [Validators.required, Validators.pattern('^[A-Za-z0-9]+$')]]
     });
   }

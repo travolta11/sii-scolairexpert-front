@@ -3,8 +3,14 @@
     {{ alertMessage }}
   </div>
   <div class="card">
-    <div class="card-header">
-      <h4>Manage Absences and Tardiness</h4>
+    <div class="container d-flex justify-content-between align-items-center mb-3">
+      <h4 class="card-header">Manage Absences and Tardiness</h4>
+      <div class="mb-0">
+        <div class="input-group input-group-merge custom-width" >
+          <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search small-icon"></i></span>
+          <input type="text" class="form-control" placeholder="Search by name..." [(ngModel)]="searchTerm" (input)="filterStudents()" />
+        </div>
+    </div>
     </div>
     <div class="card-body">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -58,7 +64,7 @@
                   <button 
                     class="btn btn-sm btn-primary" 
                     (click)="openReasonDialog(student)" 
-                    [disabled]="!student.absenceChecked && !student.tardinessChecked">
+                    [disabled]="!student.absenceDisabled && !student.tardinessDisabled">
                     +
                   </button>
                 </td>

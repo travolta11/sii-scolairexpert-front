@@ -42,7 +42,7 @@
           <input type="text" id="phone" formControlName="phone" class="form-control" required />
           <div class="text-danger" *ngIf="parentForm.get('phone')!.invalid && (parentForm.get('phone')!.dirty || parentForm.get('phone')!.touched)">
             <div *ngIf="parentForm.get('phone')!.errors?.['required']">This field is required.</div>
-            <div *ngIf="parentForm.get('phone')!.errors?.['pattern']">Invalid format. Only 10 digits are allowed.</div>
+            <!--div *ngIf="parentForm.get('phone')!.errors?.['pattern']">Invalid format. Only 10 digits are allowed.</div-->
           </div>
         </div>
         <div class="text-danger" *ngIf="phoneExistsMessage">{{ phoneExistsMessage }}</div>

@@ -52,16 +52,12 @@ export class ReasonDialogComponent {
 
     if (this.data.absenceChecked) {
       const absenceData = { studentId, date, reason: formValues.absenceReason };
-      this.absenceService.updateAbsenceReason(absenceData).subscribe(() => {
-        console.log('Absence reason updated successfully');
-      });
+      this.absenceService.updateAbsenceReason(absenceData);
     }
 
     if (this.data.retardChecked) {
       const retardData = { studentId, date, reason: formValues.tardinessReason };
-      this.retardService.updateRetardReason(retardData).subscribe(() => {
-        console.log('Tardiness reason updated successfully');
-      });
+      this.retardService.updateRetardReason(retardData);
     }
 
     this.dialogRef.close();

@@ -26,7 +26,7 @@ export class ParentEditComponent {
       firstName: [data?.firstName, [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       lastName: [data?.lastName, [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       email: [data?.email, [Validators.required, Validators.email]],
-      phone: [data?.phone, [Validators.pattern('^[0-9]{10}$')]],
+      phone: [data?.phone, [Validators.required]],
       cin: [data?.cin, [Validators.required, Validators.pattern('^[A-Za-z0-9]+$')]]
     });
   }
