@@ -3,6 +3,7 @@ import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../../../model/user';
 import { UserService } from '../../../services/user/user.service';
+import { UserRole } from '../../../enum/user-role';
 
 @Component({
   selector: 'ssi-sx-update-user',
@@ -15,6 +16,7 @@ export class UpdateUserComponent implements OnChanges {
   @Input() userId?: number;
   @Output() userUpdated = new EventEmitter<User>();
 
+  Roles = UserRole;
   isPasswordHidden = true;
   userForm: FormGroup;
 
