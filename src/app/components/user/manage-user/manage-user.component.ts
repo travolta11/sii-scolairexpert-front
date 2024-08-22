@@ -75,7 +75,7 @@ export class ManageUserComponent implements OnInit {
     }
   }
 
-  viewUserDetails(userId: number) {
+  updateUserDetails(userId: number) {
     this.selectedUserId = userId;
   }
 }

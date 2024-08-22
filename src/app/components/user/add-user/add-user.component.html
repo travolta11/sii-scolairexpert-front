@@ -58,9 +58,8 @@
           <label for="exampleFormControlSelect1" class="form-label" >Role</label>
           <select class="form-select" id="exampleFormControlSelect1" aria-label="Select role" formControlName="role">
             <option value="" selected>Select role</option>
-            <option value="Administration">Administration</option>
-            <option value="Accounting">Accounting</option>
-            <option value="Admin">Admin</option>
+            <option *ngFor="let role of Roles | keyvalue" [value]="role.value">{{role.value}}</option>
+           
           </select>
           <div *ngIf="userForm.get('role')?.touched && userForm.get('role')?.invalid" class="text-danger">
             Role is required.

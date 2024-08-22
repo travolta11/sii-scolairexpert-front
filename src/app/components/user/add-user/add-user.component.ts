@@ -3,6 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../../../model/user';
 import { UserService } from '../../../services/user/user.service';
+import { UserRole } from '../../../enum/user-role';
 
 @Component({
   selector: 'ssi-sx-add-user',
@@ -14,6 +15,9 @@ import { UserService } from '../../../services/user/user.service';
 export class AddUserComponent {
   isPasswordHidden = true;
   @Output() userAdded = new EventEmitter<User>();
+
+  Roles= UserRole;
+
 
   togglePasswordVisibility() {
     this.isPasswordHidden = !this.isPasswordHidden;
