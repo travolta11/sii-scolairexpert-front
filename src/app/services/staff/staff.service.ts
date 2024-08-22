@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
-import {Staff} from "../models/Staff.model";
-import {StaffDto} from "../models/StaffDto.model";
+import {Staff} from "../../models/Staff.model";
+import {StaffDto} from "../../models/StaffDto.model";
+import {Teacher} from "../../model/Teacher/teacher";
 
 @Injectable({
   providedIn: 'root'
@@ -48,8 +49,8 @@ export class StaffService {
     )
   }
 
-  addStaffMember(newStaffMember: StaffDto): Observable<number> {
-    return this.http.post<number>(`${this.baseUrl}`, newStaffMember);
+  getMemberById(id: number): Observable<Staff> {
+    return this.http.get<Staff>(`${this.baseUrl}/${id}`);
   }
 
 }

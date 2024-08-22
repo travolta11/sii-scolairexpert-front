@@ -1,7 +1,7 @@
 import {Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
-import {StaffService} from "../../../services/staff.service";
+import {StaffService} from "../../../services/staff/staff.service";
 import {Staff} from "../../../models/Staff.model";
 
 
