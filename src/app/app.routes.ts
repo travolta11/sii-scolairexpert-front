@@ -13,9 +13,11 @@ import { ListTeacherComponent } from './components/Teacher/list-teacher/list-tea
 import {StaffListComponent} from "./components/staff/staff-list/staff-list.component";
 
 import { UserDetailComponent } from './components/user/show-user/show-user.component';
+import { MaterielComponent } from './components/materiel/materiel.component';
 import { StudentComponent } from './components/student/student/student.component';
 import { ParentComponent } from './components/parent/parent/parent.component';
 import { AbscencesRetardsComponent } from './components/absence-retard management/abscences-retards/abscences-retards.component';
+import { MaterielComponent } from './components/materiel/materiel.component';
 
 export const routes: Routes = [
     {'path': 'login',  component:LoginComponent },
@@ -33,6 +35,7 @@ export const routes: Routes = [
     {'path': 'abscencesRetards', 'title': 'abscencesRetards', component: AbscencesRetardsComponent},
     //Route example {'path': 'add-student', 'title': 'add', component: AddStudentComponent},
 
-
+    //materiel
+    {'path': 'materiel', title: 'materiel', component: MaterielComponent},
 ];
 
