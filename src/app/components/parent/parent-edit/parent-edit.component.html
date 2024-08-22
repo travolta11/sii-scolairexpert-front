@@ -44,7 +44,7 @@
               <span class="input-group-text">+212</span>
               <input type="text" id="phone" formControlName="phone" class="form-control" />
               <div class="text-danger" *ngIf="parentForm.controls['phone'].invalid && (parentForm.controls['phone'].touched || parentForm.controls['phone'].dirty)">
-                <div *ngIf="parentForm.controls['phone'].errors?.['pattern']">Invalid format. Only 10 digits are allowed.</div>
+                <!--div *ngIf="parentForm.controls['phone'].errors?.['pattern']">Invalid format. Only 10 digits are allowed.</div-->
               </div>
             </div>
           </div>
