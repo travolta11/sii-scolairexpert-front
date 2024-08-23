@@ -23,6 +23,7 @@
     "@angular/platform-server": "^18.0.0",
     "@angular/router": "^18.1.4",
     "@angular/ssr": "^18.0.7",
+    "@ng-select/ng-select": "^13.7.0",
     "@popperjs/core": "2.9.2",
     "apexcharts-clevision": "3.28.3",
     "bootstrap": "5.1.3",
