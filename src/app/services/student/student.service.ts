@@ -39,4 +39,10 @@ export class StudentService {
   getStudentsByClassId(classId: number): Observable<Student[]> {
     return this.http.get<Student[]>(`${this.apiUrl}/class/${classId}`);
   }
+  getAllStudents(): Observable<Student []>{
+    return this.http.get<Student[]>(`${this.apiUrl}/all`)
+  }
+  getStudentsByClass(classId :number):Observable<Student []>{
+    return this.http.get<Student[]>(`${this.apiUrl}/class/${classId}`);
+  }
 }
