@@ -17,6 +17,9 @@ import { MaterielComponent } from './components/materiel/materiel.component';
 import { StudentComponent } from './components/student/student/student.component';
 import { ParentComponent } from './components/parent/parent/parent.component';
 import { AbscencesRetardsComponent } from './components/absence-retard management/abscences-retards/abscences-retards.component';
+import {ScolarCertificatComponent} from "./components/certificats/scolar-certificat/scolar-certificat.component";
+import { RoomComponent } from './components/room/room.component';
+
 
 export const routes: Routes = [
     {'path': 'login',  component:LoginComponent },
@@ -34,7 +37,15 @@ export const routes: Routes = [
     {'path': 'abscencesRetards', 'title': 'abscencesRetards', component: AbscencesRetardsComponent},
     //Route example {'path': 'add-student', 'title': 'add', component: AddStudentComponent},
 
+
     //materiel
+
     {'path': 'materiel', title: 'materiel', component: MaterielComponent},
+  {'path':'certificats',component :ScolarCertificatComponent},
+
+    {'path': 'materiel', title: 'manage materiels', component: MaterielComponent},
+
+    //room
+    {'path': 'room', 'title': 'manage rooms', component: RoomComponent},
 ];
 

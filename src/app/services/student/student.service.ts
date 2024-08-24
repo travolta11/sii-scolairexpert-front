@@ -52,4 +52,8 @@ export class StudentService {
     return this.http.get<{ [key: number]: number }>(`${this.apiUrl}/count-by-year`);
   }
   
+  getAllStudents(): Observable<Student []>{
+    return this.http.get<Student[]>(`${this.apiUrl}/all`)
+  }
+
 }
