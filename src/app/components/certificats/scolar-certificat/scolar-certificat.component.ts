@@ -98,7 +98,7 @@ export class ScolarCertificatComponent implements  OnInit{
   }
 
   onClassSelected(event: any): void {
-    this.studentService.getStudentsByClass(event.target.value).subscribe((data) => {
+    this.studentService.getStudentsByClassId(event.target.value).subscribe((data) => {
       this.filteredStudents = data;
     });
   }
