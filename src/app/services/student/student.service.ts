@@ -39,4 +39,17 @@ export class StudentService {
   getStudentsByClassId(classId: number): Observable<Student[]> {
     return this.http.get<Student[]>(`${this.apiUrl}/class/${classId}`);
   }
+
+  getTotalStudents(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/total`);
+  }
+
+  getEtudiantsParNiveau(): Observable<{ [key: string]: number }> {
+    return this.http.get<{ [key: string]: number }>(`${this.apiUrl}/par-niveau`);
+  }
+
+  getCountByYear(): Observable<{ [key: number]: number }> {
+    return this.http.get<{ [key: number]: number }>(`${this.apiUrl}/count-by-year`);
+  }
+  
 }

@@ -53,4 +53,8 @@ export class StaffService {
     return this.http.get<Staff>(`${this.baseUrl}/${id}`);
   }
 
+  getStaffCountByDepartment(): Observable<Map<string, number>> {
+    return this.http.get<Map<string, number>>(`${this.baseUrl}/count/by-department`);
+  }
+
 }
