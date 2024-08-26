@@ -19,11 +19,15 @@ import { ParentComponent } from './components/parent/parent/parent.component';
 import { AbscencesRetardsComponent } from './components/absence-retard management/abscences-retards/abscences-retards.component';
 import {ScolarCertificatComponent} from "./components/certificats/scolar-certificat/scolar-certificat.component";
 import { RoomComponent } from './components/room/room.component';
+import { DescriptionEcoleComponent } from './components/description-ecole/description-ecole.component';
+import { RoleBasedRedirectGuardService } from './services/RoleBasedRedirectGuard/role-based-redirect-guard.service';
 
 
 export const routes: Routes = [
     {'path': 'login',  component:LoginComponent },
-    { path: '', title: 'DashBoard', component: DashboardComponent },
+    { path: '', canActivate: [RoleBasedRedirectGuardService], component: UnauthorizedComponent }, // Utilisation d'un composant temporaire pour la redirection
+    { path: 'dashboard', title: 'Dashboard', component: DashboardComponent, canActivate: [AuthGuard], data: { roles: ['admin'] }},
+    { path: 'descriptionEcole', title: 'Description Ecole', component: DescriptionEcoleComponent, canActivate: [AuthGuard], data: { roles: ['parent'] }},
     { path: 'unauthorized', component: UnauthorizedComponent },
     {'path': 'manage-users', 'title': 'User Management', component: ManageUserComponent, canActivate: [AuthGuard], data: { roles: ['admin'] }},
     {'path': 'add-user', 'title': 'Add User', component: AddUserComponent},
