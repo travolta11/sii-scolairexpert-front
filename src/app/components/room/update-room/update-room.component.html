@@ -1,46 +1,44 @@
 <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Update room</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label class="form-label" for="basic-default-fullname">Name</label>
-        <input type="text" class="form-control" id="basic-default-fullname" placeholder="GE-01" formControlName="name" />
-        <div *ngIf="roomForm.get('name')?.touched && roomForm.get('name')?.invalid" class="text-danger">
-          Name is required.
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Update room</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label class="form-label" for="basic-default-fullname">Name</label>
+          <input type="text" class="form-control" id="basic-default-fullname" placeholder="GE-01" formControlName="name" />
+          <div *ngIf="roomForm.get('name')?.touched && roomForm.get('name')?.invalid" class="text-danger">
+            Name is required.
+          </div>
         </div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label" for="basic-default-fullname">Capacity</label>
-        <input type="number" class="form-control" id="basic-default-fullname" placeholder="30" formControlName="capacity" />
-        <div *ngIf="roomForm.get('capacity')?.touched && roomForm.get('capacity')?.invalid" class="text-danger">
-          Capacity is required.
+        <div class="mb-3">
+          <label class="form-label" for="basic-default-fullname">Capacity</label>
+          <input type="number" class="form-control" id="basic-default-fullname" placeholder="30" formControlName="capacity" />
+          <div *ngIf="roomForm.get('capacity')?.touched && roomForm.get('capacity')?.invalid" class="text-danger">
+            Capacity is required.
+          </div>
         </div>
-      </div>
-   <div class="mb-3">
-    <label class="form-label" for="basic-default-materiel">Materiels</label>
-    <ng-select
-    [items]="materielOptions"
-    bindLabel="name"
-    bindValue="id"
-    [multiple]="true"
-    placeholder="Select materiels"
-    formControlName="materiel">
-  </ng-select>
-    <div *ngIf="roomForm.get('materiel')?.touched && roomForm.get('materiel')?.invalid" class="text-danger">
-      At least one materiel must be selected.
+        <div class="mb-3">
+          <label class="form-label" for="basic-default-materiel">Materiels</label>
+          <ng-select
+            [items]="materielOptions"
+            bindLabel="code"
+            bindValue="id"
+            [multiple]="true"
+            placeholder="Select materiels"
+            formControlName="materiel">
+          </ng-select>
+          <div *ngIf="roomForm.get('materiel')?.touched && roomForm.get('materiel')?.invalid" class="text-danger">
+            At least one materiel must be selected.
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()">Save</button>
     </div>
   </div>
-      
-    </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onCancel()">Cancel</button>
-        <button type="submit" class="btn btn-primary" (click)="onSubmit()" >Save</button>
-      </div>
-    </div>
-  </div>
-  
+</div>
