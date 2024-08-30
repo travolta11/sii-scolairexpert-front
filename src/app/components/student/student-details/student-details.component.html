@@ -1,63 +1,62 @@
-
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="modalCenterTitle">Etudiant détails</h5>
-    </div>
-    <div class="modal-body">
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-              <th scope="row">Identifiant:</th>
-              <td>{{ data.id }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Nom:</th>
-              <td>{{ data.lastName }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Prénom:</th>
-              <td>{{ data.firstName }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Email:</th>
-              <td>{{ data.email }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Numéro de téléphone:</th>
-              <td>{{ data.phoneNumber }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Adresse:</th>
-              <td>{{ data.address }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Code postal:</th>
-              <td>{{ data.zipCode }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Genre:</th>
-              <td>{{ data.gender }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Level:</th>
-              <td>{{ data.level }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Classe:</th>
-              <td>{{ className }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Date Of Birth </th>
-              <td>{{ data.dateOfBirth }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Parent:</th>
-              <td>{{ parentName }}</td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="closeDialog()">Fermer</button>
-    </div>
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="modalCenterTitle">Student Details</h5>
   </div>
+  <div class="modal-body">
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <th scope="row">ID:</th>
+          <td>{{ data.id }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Last Name:</th>
+          <td>{{ data.lastName }}</td>
+        </tr>
+        <tr>
+          <th scope="row">First Name:</th>
+          <td>{{ data.firstName }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Email:</th>
+          <td>{{ data.email }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Phone Number:</th>
+          <td>{{ data.phoneNumber }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Address:</th>
+          <td>{{ data.address }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Zip Code:</th>
+          <td>{{ data.zipCode }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Gender:</th>
+          <td>{{ data.gender }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Level:</th>
+          <td>{{ data.level }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Class:</th>
+          <td>{{ className }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Date of Birth:</th>
+          <td>{{ data.dateOfBirth }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Parent:</th>
+          <td>{{ parentName }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="closeDialog()">Close</button>
+  </div>
+</div>

@@ -79,6 +79,14 @@ export class ScolarCertificatComponent implements  OnInit{
     }
   }
 
+  goToFirstPage(): void {
+    this.goToPage(1);
+  }
+  
+  goToLastPage(): void {
+    this.goToPage(this.totalPages);
+  }  
+
   updateVisibleData() {
     this.filteredStudents = this.allStudents.filter(student =>
       student.firstName.toLowerCase().includes(this.searchValue.toLowerCase()) ||

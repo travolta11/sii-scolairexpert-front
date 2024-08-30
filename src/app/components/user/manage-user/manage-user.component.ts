@@ -25,6 +25,8 @@ export class ManageUserComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 10;
   selectedUserId?: number;
+  totalPages: number = 0;
+  paginatedUsers: User[] = [];
 
   constructor(private userService: UserService) { }
 
@@ -37,12 +39,55 @@ export class ManageUserComponent implements OnInit {
       (data: User[]) => {
         this.users = data;
         this.filterUsers();
+        this.users = data;
+        this.totalPages = Math.ceil(this.users.length / this.itemsPerPage);
+        this.updatePaginatedUsers();
       },
       error => {
         console.error('Error fetching users:', error);
       }
     );
   }
+
+  updatePaginatedUsers() {
+    const filteredUsers = this.users.filter(user =>
+      user.username?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      user.email?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      user.role?.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedUsers= filteredUsers.slice(start, end);
+  }
+  goToPage(page: number) {
+    this.currentPage = page;
+    this.updatePaginatedUsers();
+  }
+  
+  goToNextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePaginatedUsers();
+    }
+  }
+  
+  goToPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedUsers();
+    }
+  }
+  
+  goToFirstPage() {
+    this.currentPage = 1;
+    this.updatePaginatedUsers();
+  }
+  
+  goToLastPage() {
+    this.currentPage = this.totalPages;
+    this.updatePaginatedUsers();
+  }
+  
 
   onUserAdded(user: User) {
     this.loadUsers();

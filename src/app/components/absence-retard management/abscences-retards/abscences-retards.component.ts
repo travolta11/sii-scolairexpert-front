@@ -178,6 +178,20 @@ export class AbscencesRetardsComponent implements OnInit {
     }
   }
 
+  gotoFirstPage(): void {
+    if (this.currentPage > 0) {
+      this.currentPage = 1;
+      this.updatePaginatedStudents();
+    }
+  }
+  
+  gotoLastPage(): void {
+    if (this.currentPage < this.totalPages - 1) {
+      this.currentPage = this.totalPages;
+      this.updatePaginatedStudents();
+    }
+  }
+
   goToPage(page: number): void {
     this.currentPage = page;
     this.updatePaginatedStudents();

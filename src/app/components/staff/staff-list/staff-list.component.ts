@@ -91,6 +91,15 @@ export class StaffListComponent implements OnInit{
       this.goToPage(this.currentPage - 1);
     }
   }
+
+  goToFirstPage(): void {
+    this.goToPage(1);
+  }
+  
+  goToLastPage(): void {
+    this.goToPage(this.totalPages);
+  }  
+
   showMember(member: Staff) {
     this.selectedMemberId = member.id !== undefined ? member.id : null;
   }

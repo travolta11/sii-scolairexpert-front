@@ -59,7 +59,18 @@ export class StudentComponent implements OnInit {
       this.loadStudents(this.currentPage + 1);
     }
   }
-
+  gotoFirstPage(): void {
+    if (this.currentPage > 0) {
+      this.loadStudents(0);
+    }
+  }
+  
+  gotoLastPage(): void {
+    if (this.currentPage < this.totalPages - 1) {
+      this.loadStudents(this.totalPages - 1);
+    }
+  }
+  
   deleteStudent(id: number): void {
     if (confirm('Are you sure you want to delete this student?')) {
       this.studentService.deleteStudent(id).subscribe(() => {

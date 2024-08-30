@@ -30,12 +30,12 @@
   </li>
    <!-- Espace Informations -->
    <li class="menu-header small text-uppercase" style="font-size: 12px;">
-    <span class="menu-header-text">Espace Informations</span>
+    <span class="menu-header-text">Information Space</span>
   </li>
   <li class="menu-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">
     <a routerLink="/student" href="javascript:void(0);" class="menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">
       <i class="menu-icon tf-icons bx bx-user-pin"></i>
-      <div data-i18n="Students">Eleves</div>
+      <div data-i18n="Students">Students</div>
     </a>
   </li>
   <li class="menu-item"routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">
@@ -47,15 +47,15 @@
   <li class="menu-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
     <a class="menu-link" routerLink="/listTeacher">
       <i class="menu-icon tf-icons bx bx-briefcase"></i>
-      <div data-i18n="Teachers">Enseignants</div>
+      <div data-i18n="Teachers">Teachers</div>
     </a>
   </li>
 
   <!-- Espace Ressources -->
   <li class="menu-header small text-uppercase">
-    <span class="menu-header-text">Espace Ressources</span>
+    <span class="menu-header-text">Resource Space</span>
   </li>
-  <li class="menu-item">
+  <li class="menu-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
     <a href="javascript:void(0);" class="menu-link menu-toggle" routerLink="staff">
       <i class="menu-icon tf-icons bx bx-dock-top"></i>
       <div data-i18n="Account Settings">Staff Management</div>
@@ -77,12 +77,12 @@
 
   <!-- Espace Scolaire -->
   <li class="menu-header small text-uppercase">
-    <span class="menu-header-text">Espace Scolaire</span>
+    <span class="menu-header-text">School Space</span>
   </li>
   <li class="menu-item">
     <a href="javascript:void(0);" class="menu-link">
       <i class="menu-icon tf-icons bx bx-calendar"></i>
-      <div data-i18n="Sessions & TimeTable">Séances & Emplois</div>
+      <div data-i18n="Sessions & TimeTable">Sessions & Timetable</div>
     </a>
   </li>
   <li class="menu-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
@@ -91,16 +91,16 @@
       <div data-i18n="Classes">Classes</div>
     </a>
   </li>
-  <li class="menu-item">
-    <a href="/certificats" class="menu-link">
+  <li class="menu-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+    <a routerLink="/certificats" href="javascript:void(0);" class="menu-link">
       <i class="menu-icon tf-icons bx bx-certification"></i>
-      <div data-i18n="Certifications">Certificats</div>
+      <div data-i18n="Certifications">Certifications</div>
     </a>
   </li>
   <li class="menu-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">
     <a routerLink="/abscencesRetards" href="javascript:void(0);" class="menu-link">
       <i class="menu-icon tf-icons bx bx-user-minus"></i>
-      <div data-i18n="Absences & Tardiness">Absences & Retards</div>
+      <div data-i18n="Absences & Tardiness">Absences & Tardiness</div>
     </a>
   </li>
 </ul>

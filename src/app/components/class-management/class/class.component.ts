@@ -21,8 +21,9 @@ export class ClasseComponent implements OnInit {
   readonly dialog = inject(MatDialog);
   classes: Class[] = [];
   filteredClasses: Class[] = [];
-  paginatedClasses: Class[] = [];
   searchTerm: string = '';
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
 
@@ -38,13 +39,46 @@ export class ClasseComponent implements OnInit {
       (data) => {
         this.classes = data;
         this.filteredClasses = data;
-        this.paginateClasses(); 
       },
       (error) => {
         console.error('Error fetching classes:', error);
       }
     );
   }
+
+  get totalItems(): number {
+    return this.classes.length;
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.totalItems / this.itemsPerPage);
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.goToPage(this.currentPage + 1);
+    }
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.goToPage(this.currentPage - 1);
+    }
+  }
+
+  goToFirstPage(): void {
+    this.goToPage(1);
+  }
+  
+  goToLastPage(): void {
+    this.goToPage(this.totalPages);
+  }  
 
   // Delete class
   deleteClass(classId: number): void {
@@ -104,7 +138,6 @@ export class ClasseComponent implements OnInit {
     if (this.paginator) {
       this.paginator.firstPage();
     }
-    this.paginateClasses(); 
   }
 
   highlightSearch(text: string): string {
@@ -114,15 +147,5 @@ export class ClasseComponent implements OnInit {
     const searchTermRegex = new RegExp(`(${this.searchTerm})`, 'gi');
     return text.replace(searchTermRegex, '<span class="highlight">$1</span>');
   }
-
-  paginateClasses(): void {
-    const startIndex = this.paginator!.pageIndex * this.paginator!.pageSize;
-    this.paginatedClasses = this.filteredClasses.slice(startIndex, startIndex + this.paginator!.pageSize);
-  }
-
-  onPageChange(event: PageEvent): void {
-    this.paginateClasses();
-  }
-
   
 }

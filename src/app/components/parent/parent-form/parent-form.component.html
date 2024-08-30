@@ -1,3 +1,5 @@
+<div class="card">
+  <h5 class="card-header mb-0 " >Add parent</h5>
 <div class="card-body">
   <form [formGroup]="parentForm" (ngSubmit)="onSubmit()">
     <div class="row">
@@ -11,7 +13,7 @@
         <div class="text-danger" *ngIf="cinExistsMessage">{{ cinExistsMessage }}</div>
       </div>
       <div class="mb-3 col-md-6">
-        <label for="firstName" class="form-label">Parent First Name <span class="required-asterisk">*</span></label>
+        <label for="firstName" class="form-label">First Name <span class="required-asterisk">*</span></label>
         <input class="form-control" type="text" id="firstName" formControlName="firstName" autofocus required />
         <div class="text-danger" *ngIf="parentForm.get('firstName')!.invalid && (parentForm.get('firstName')!.dirty || parentForm.get('firstName')!.touched)">
           <div *ngIf="parentForm.get('firstName')!.errors?.['required']">This field is required.</div>
@@ -19,7 +21,7 @@
         </div>
       </div>
       <div class="mb-3 col-md-6">
-        <label for="lastName" class="form-label">Parent Last Name <span class="required-asterisk">*</span></label>
+        <label for="lastName" class="form-label">Last Name <span class="required-asterisk">*</span></label>
         <input class="form-control" type="text" id="lastName" formControlName="lastName" required />
         <div class="text-danger" *ngIf="parentForm.get('lastName')!.invalid && (parentForm.get('lastName')!.dirty || parentForm.get('lastName')!.touched)">
           <div *ngIf="parentForm.get('lastName')!.errors?.['required']">This field is required.</div>
@@ -27,7 +29,7 @@
         </div>
       </div>
       <div class="mb-3 col-md-6">
-        <label for="email" class="form-label">Parent E-mail <span class="required-asterisk">*</span></label>
+        <label for="email" class="form-label">E-mail <span class="required-asterisk">*</span></label>
         <input class="form-control" type="text" id="email" formControlName="email" required />
         <div class="text-danger" *ngIf="parentForm.get('email')!.invalid && (parentForm.get('email')!.dirty || parentForm.get('email')!.touched)">
           <div *ngIf="parentForm.get('email')!.errors?.['required']">This field is required.</div>
@@ -36,7 +38,7 @@
         <div class="text-danger" *ngIf="emailExistsMessage">{{ emailExistsMessage }}</div>
       </div>
       <div class="mb-3 col-md-6">
-        <label class="form-label" for="phone">Parent Phone Number <span class="required-asterisk">*</span></label>
+        <label class="form-label" for="phone">Phone Number <span class="required-asterisk">*</span></label>
         <div class="input-group input-group-merge">
           <span class="input-group-text">+212</span>
           <input type="text" id="phone" formControlName="phone" class="form-control" required />
@@ -53,4 +55,5 @@
       <button type="button" class="btn btn-outline-secondary" (click)="onCancel()">Cancel</button>
     </div>
   </form>
+</div>
 </div>

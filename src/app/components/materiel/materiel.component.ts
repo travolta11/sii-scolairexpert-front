@@ -23,6 +23,8 @@ export class MaterielComponent implements OnInit{
   searchTerm: string = '';
   selectedMaterielId?: number;
   showAlert: boolean = false;
+  totalPages: number = 0;
+  paginatedRMateriels: Materiel[] = [];
 
   constructor(private materielService: MaterielService){}
 
@@ -35,13 +37,55 @@ export class MaterielComponent implements OnInit{
       (data: Materiel[])=> {
         this.materiel= data;
         this.filterMateriel();
-
+        this.totalPages = Math.ceil(this.materiel.length / this.itemsPerPage);
+        this.updatePaginatedMateriels();
       },
       error => {
         console.log('error fetching materiel',error);
       }
     );
   }
+
+  updatePaginatedMateriels() {
+    const filtredMateriel = this.materiel.filter(mat =>
+      mat.code?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      mat.type?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      mat.status?.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedRMateriels= filtredMateriel.slice(start, end);
+  }
+
+  goToPage(page: number) {
+    this.currentPage = page;
+    this.updatePaginatedMateriels();
+  }
+  
+  goToNextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePaginatedMateriels();
+    }
+  }
+  
+  goToPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedMateriels();
+    }
+  }
+  
+  goToFirstPage() {
+    this.currentPage = 1;
+    this.updatePaginatedMateriels();
+  }
+  
+  goToLastPage() {
+    this.currentPage = this.totalPages;
+    this.updatePaginatedMateriels();
+  }
+  
 
   OnMaterielAdded(materiel: Materiel){
     this.loadMateriel();
