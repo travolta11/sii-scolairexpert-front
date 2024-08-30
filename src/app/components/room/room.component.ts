@@ -26,6 +26,8 @@ export class RoomComponent implements OnInit {
   showAlert: boolean = false;
   filtredRooms: Room[] = [];
   selectedRoom: Room | undefined;
+  totalPages: number = 0;
+  paginatedRooms: Room[] = [];
 
 
   constructor(
@@ -42,8 +44,51 @@ export class RoomComponent implements OnInit {
       this.rooms = rooms;
       this.rooms.forEach(room => this.loadMaterielCodes(room));
       this.filtredRooms = [...this.rooms]; 
+      this.totalPages = Math.ceil(this.rooms.length / this.itemsPerPage);
+        this.updatePaginatedRooms();
     });
   }
+
+  updatePaginatedRooms() {
+    const filtredRooms = this.rooms.filter(room =>
+      room.materielCodes?.join(', ').toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      String(room.capacity).toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      room.name?.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedRooms= filtredRooms.slice(start, end);
+  }
+
+  goToPage(page: number) {
+    this.currentPage = page;
+    this.updatePaginatedRooms();
+  }
+  
+  goToNextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePaginatedRooms();
+    }
+  }
+  
+  goToPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedRooms();
+    }
+  }
+  
+  goToFirstPage() {
+    this.currentPage = 1;
+    this.updatePaginatedRooms();
+  }
+  
+  goToLastPage() {
+    this.currentPage = this.totalPages;
+    this.updatePaginatedRooms();
+  }
+  
 
   loadMaterielCodes(room: Room): void {
     if (room.materielIds && room.materielIds.length > 0) {

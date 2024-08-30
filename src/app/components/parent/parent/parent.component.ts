@@ -53,6 +53,18 @@ export class ParentComponent implements OnInit {
     }
   }
 
+  gotoFirstPage(): void {
+    if (this.currentPage > 0) {
+      this.loadParents(0);
+    }
+  }
+  
+  gotoLastPage(): void {
+    if (this.currentPage < this.totalPages - 1) {
+      this.loadParents(this.totalPages - 1);
+    }
+  }
+
   deleteParent(id: number): void {
     if (confirm('Are you sure you want to delete this parent?')) {
       this.parentService.deleteParent(id).subscribe(() => {
