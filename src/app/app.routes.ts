@@ -19,6 +19,7 @@ import { ParentComponent } from './components/parent/parent/parent.component';
 import { AbscencesRetardsComponent } from './components/absence-retard management/abscences-retards/abscences-retards.component';
 import {ScolarCertificatComponent} from "./components/certificats/scolar-certificat/scolar-certificat.component";
 import { RoomComponent } from './components/room/room.component';
+import { TimetableComponent } from './components/timetable/timetable.component';
 
 
 export const routes: Routes = [
@@ -47,5 +48,8 @@ export const routes: Routes = [
 
     //room
     {'path': 'room', 'title': 'manage rooms', component: RoomComponent},
+
+    //emplois
+    {'path': 'emplois', 'title': 'Sessions' , component: TimetableComponent},
 ];
 

@@ -1,0 +1,49 @@
+<button (click)="generateTimetable()">Generate Timetable</button>
+<div class="timetable-container">
+    <h2>Select Timetable</h2>
+    <div class="selection-container">
+      <label for="classSelect">Select Class:</label>
+      <select id="classSelect" (change)="onClassChange($event)">
+        <option value="">Chose from bellow</option>
+        <option *ngFor="let classEntity of timetableData?.classList" [value]="classEntity.id">
+          {{ classEntity.name }}
+        </option>
+      </select>
+  
+      <label for="teacherSelect">Select Teacher:</label>
+      <select id="teacherSelect" (change)="onTeacherChange($event)">
+        <option value="">Chose from bellow</option>
+        <option *ngFor="let teacher of timetableData?.teacherList" [value]="teacher.id">
+          {{ teacher.fullName }}
+        </option>
+      </select>
+    </div>
+  
+    <div class="timetable-display">
+      <h3>Timetable</h3>
+      <table *ngIf="filteredSessions.length">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Class</th>
+            <th>Teacher</th>
+            <th>Room</th>
+            <th>Subject</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let session of filteredSessions">
+            <td class="dayweek">{{ session.timeslot.dayOfWeek }}</td>
+            <td>{{ session.timeslot.startTime }} - {{ session.timeslot.endTime }}</td>
+            <td>{{ session.classEntity.name }}</td>
+            <td>{{ session.teacher.fullName }}</td>
+            <td>{{ session.room.name }}</td>
+            <td>{{ session.subject.name }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="!filteredSessions.length">No sessions available for the selected class or teacher.</p>
+    </div>
+  </div>
+  
