@@ -15,7 +15,7 @@ export class OptaplannerService {
     console.log('Start solving initiated');
     return this.http.post(`${this.baseUrl}/solve`, {}).pipe(
       
-      delay(40000), // Wait   seconds
+      delay(30000), // Wait   seconds
       switchMap(() =>
          this.stopSolving()) //  stop solving
     );
