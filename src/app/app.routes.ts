@@ -27,7 +27,7 @@ import { RoleBasedRedirectGuardService } from './services/RoleBasedRedirectGuard
 export const routes: Routes = [
     {'path': 'login',  component:LoginComponent },
     { path: '', canActivate: [RoleBasedRedirectGuardService], component: UnauthorizedComponent }, // Utilisation d'un composant temporaire pour la redirection
-    { path: 'dashboard', title: 'Dashboard', component: DashboardComponent, canActivate: [AuthGuard], data: { roles: ['admin'] }},
+    { path: 'dashboard', title: 'Dashboard', component: DashboardComponent},
     { path: 'descriptionEcole', title: 'Description Ecole', component: DescriptionEcoleComponent, canActivate: [AuthGuard], data: { roles: ['parent'] }},
     { path: 'unauthorized', component: UnauthorizedComponent },
     {'path': 'manage-users', 'title': 'User Management', component: ManageUserComponent, canActivate: [AuthGuard], data: { roles: ['admin'] }},
