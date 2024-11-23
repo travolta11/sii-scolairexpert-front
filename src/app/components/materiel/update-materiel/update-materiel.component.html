@@ -1,0 +1,47 @@
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update materiel</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="materielForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label" for="basic-default-fullname">Code</label>
+        <input type="text" class="form-control" id="basic-default-fullname" placeholder="ssi-printer-01" formControlName="code" />
+        <div *ngIf="materielForm.get('code')?.touched && materielForm.get('code')?.invalid" class="text-danger">
+          Code is required.
+        </div>
+      </div>
+      <div class="mb-3">
+          <label for="exampleFormControlSelect1" class="form-label">Type</label>
+          <select class="form-select" id="select-type" aria-label="Default select example" formControlName="type">
+            <option selected>Open this select menu</option>
+            <option *ngFor="let type of materielsType | keyvalue" [value]="type.value">{{type.value}}</option>
+            
+          </select>
+          <div *ngIf="materielForm.get('type')?.touched && materielForm.get('type')?.invalid" class="text-danger">
+            Type is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlSelect1" class="form-label">Status</label>
+          <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" formControlName="status">
+            <option selected>Open this select menu</option>
+            <option *ngFor="let status of Status | keyvalue" [value]="status.value">{{status.value}}</option>
+            
+          </select>
+          <div *ngIf="materielForm.get('status')?.touched && materielForm.get('status')?.invalid" class="text-danger">
+            Status is required.
+          </div>
+        </div>
+      
+    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()" >Save</button>
+      </div>
+    </div>
+  </div>
+  

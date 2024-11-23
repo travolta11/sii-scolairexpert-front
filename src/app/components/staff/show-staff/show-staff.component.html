@@ -1,0 +1,26 @@
+<div class="modal-dialog modal-dialog-centered container" id="viewTeacherModal" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">View Staff Member </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <div *ngIf="staffMember; else noMember">
+        <p><strong>First Name:</strong> {{ staffMember.firstName }}</p>
+        <p><strong>Last Name:</strong> {{ staffMember.lastName }}</p>
+        <p><strong>Email:</strong> {{ staffMember.email }}</p>
+        <p><strong>Phone Number:</strong> {{ staffMember.phone }}</p>
+        <p><strong>Position:</strong> {{ staffMember.position }}</p>
+        <p><strong>CIN:</strong> {{ staffMember.cin }}</p>
+        <p><strong>Department</strong> {{ staffMember.department }}</p>
+        <p><strong>Start Date:</strong> {{ staffMember.date_of_start }}</p>
+        <p><strong>Birth Date:</strong> {{ staffMember.date_of_birth }}</p>
+      </div>
+      <ng-template #noMember>
+        <p>No information available.</p>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+

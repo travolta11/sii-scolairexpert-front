@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-header">
+      <h4>Enter Reason</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="reasonForm">
+        <div class="row">
+          <div *ngIf="data.absenceChecked" class="mb-3 col-md-8">
+            <label for="absenceReason" class="form-label">Absence Reason <span class="required-asterisk">*</span></label>
+            <input class="form-control" type="text" id="absenceReason" formControlName="absenceReason"/>
+          </div>
+          <div *ngIf="data.retardChecked" class="mb-3 col-md-8">
+            <label for="tardinessReason" class="form-label">Tardiness Reason <span class="required-asterisk">*</span></label>
+            <input class="form-control" type="text" id="tardinessReason" formControlName="tardinessReason" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="saveReasons()" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

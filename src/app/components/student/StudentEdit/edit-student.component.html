@@ -1,0 +1,109 @@
+<div class="modal-content" style="max-height: 80vh; max-width: 80vh; overflow-y: auto;">
+  <div class="modal-header">
+    <h5 class="modal-title" id="modalCenterTitle">Edit Student</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeDialog()"></button>
+  </div>
+  <hr class="my-0" />
+  <div class="card-body">
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="firstName" class="form-label">First Name <span class="required-asterisk">*</span></label>
+          <input class="form-control" type="text" id="firstName" formControlName="firstName" autofocus required />
+          <div class="text-danger" *ngIf="studentForm.controls['firstName']?.invalid && (studentForm.controls['firstName']?.dirty || studentForm.controls['firstName']?.touched)">
+            <div *ngIf="studentForm.controls['firstName']?.errors?.['required']">This field is required.</div>
+            <div *ngIf="studentForm.controls['firstName']?.errors?.['pattern']">Invalid format. Only letters are allowed.</div>
+          </div>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="lastName" class="form-label">Last Name <span class="required-asterisk">*</span></label>
+          <input class="form-control" type="text" id="lastName" formControlName="lastName" required />
+          <div class="text-danger" *ngIf="studentForm.controls['lastName']?.invalid && (studentForm.controls['lastName']?.touched || studentForm.controls['lastName']?.dirty)">
+            <div *ngIf="studentForm.controls['lastName']?.errors?.['required']">This field is required.</div>
+            <div *ngIf="studentForm.controls['lastName']?.errors?.['pattern']">Invalid format. Only letters are allowed.</div>
+          </div>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="email" class="form-label">E-mail <span class="required-asterisk">*</span></label>
+          <input class="form-control" type="text" id="email" formControlName="email" required />
+          <div class="text-danger" *ngIf="studentForm.get('email')?.invalid && (studentForm.get('email')?.dirty || studentForm.get('email')?.touched)">
+            <div *ngIf="studentForm.get('email')?.errors?.['required']">This field is required.</div>
+            <div *ngIf="studentForm.get('email')?.errors?.['email']">Invalid email format.</div>
+          </div>
+          <div class="text-danger" *ngIf="emailExistsMessage">{{ emailExistsMessage }}</div>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label class="form-label" for="phoneNumber">Phone Number</label>
+          <div class="input-group input-group-merge">
+            <span class="input-group-text">+212</span>
+            <input type="text" id="phoneNumber" class="form-control" formControlName="phoneNumber" />
+            <div class="text-danger" *ngIf="studentForm.get('phoneNumber')?.invalid && (studentForm.get('phoneNumber')?.dirty || studentForm.get('phoneNumber')?.touched)">
+              <div *ngIf="studentForm.get('phoneNumber')?.errors?.['pattern']">Invalid format. Only 10 digits are allowed.</div>
+            </div>
+          </div>
+          <div class="text-danger" *ngIf="phoneExistsMessage">{{ phoneExistsMessage }}</div>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="address" class="form-label">Address <span class="required-asterisk">*</span></label>
+          <input type="text" class="form-control" id="address" formControlName="address" required />
+          <div class="text-danger" *ngIf="studentForm.get('address')?.invalid && (studentForm.get('address')?.dirty || studentForm.get('address')?.touched)">
+            <div *ngIf="studentForm.get('address')?.errors?.['required']">This field is required.</div>
+          </div>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="zipCode" class="form-label">Zip Code</label>
+          <input type="text" class="form-control" id="zipCode" formControlName="zipCode" maxlength="5" />
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="dateOfBirth" class="form-label">Date of birth</label>
+          <input type="date" class="form-control" id="dateOfBirth" formControlName="dateOfBirth"/>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="gender" class="form-label">Gender<span class="required-asterisk">*</span></label>
+            <select id="gender"  class="select2 form-select" formControlName="gender">
+              <option *ngFor="let gender of genders | keyvalue" [value]="gender.value">{{ gender.value }}</option>
+            </select>
+          <div class="text-danger" *ngIf="studentForm.get('gender')?.invalid && (studentForm.get('gender')?.dirty || studentForm.get('gender')?.touched)">
+            <div *ngIf="studentForm.get('gender')?.errors?.['required']">This field is required.</div>
+          </div>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="level" class="form-label">Level<span class="required-asterisk">*</span></label>
+          <select id="level" class="select2 form-select" formControlName="level">
+            <option *ngFor="let level of levels | keyvalue" [value]="level.value">{{ level.value }}</option>
+          </select>
+          <div class="text-danger" *ngIf="studentForm.get('level')?.invalid && (studentForm.get('level')?.dirty || studentForm.get('level')?.touched)">
+            <div *ngIf="studentForm.get('level')?.errors?.['required']">This field is required.</div>
+          </div>
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="classId" class="form-label">Class <span class="required-asterisk">*</span></label>
+          <select id="classId" class="select2 form-select" formControlName="classId" required>
+            <option value="">Select Classe</option>
+            <option *ngFor="let classe of classes" [value]="classe.id">{{ classe.name }}</option>
+          </select>
+          <div class="text-danger" *ngIf="studentForm.get('classe')?.invalid && (studentForm.get('classe')?.dirty || studentForm.get('classe')?.touched)">
+            <div *ngIf="studentForm.get('classe')?.errors?.['required']">This field is required.</div>
+          </div>
+        </div>        
+        <div class="mb-3 col-md-6">
+          <label for="cin" class="form-label">CIN <span class="required-asterisk">*</span></label>
+          <input class="form-control" type="text" id="cin" formControlName="cin" required />
+          <div class="text-center mt-2">
+            <button type="button" class="btn btn-outline-success" (click)="openDialog()">Add New Parent</button>
+          </div>
+          <div class="text-danger" *ngIf="studentForm.controls['cin']?.invalid && (studentForm.controls['cin']?.dirty || studentForm.controls['cin']?.touched)">
+            <div *ngIf="studentForm.controls['cin']?.errors?.['required']">This field is required.</div>
+          </div>
+          <div class="text-danger" *ngIf="parentNotFound">
+            Parent with the given CIN does not exist. Please check the CIN or create a new parent.
+          </div>
+        </div>
+      </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary me-2">Submit</button>
+          <button type="button" class="btn btn-outline-secondary" (click)="closeDialog()">Cancel</button>
+        </div>
+      </form>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div *ngIf="user; else errorTemplate" class="container py-4">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">User Details</h5>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><strong>ID:</strong> {{ user.id }}</p>
+      <p class="card-text"><strong>Username:</strong> {{ user.username }}</p>
+      <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+      <p class="card-text"><strong>Password:</strong> {{ user.password }}</p>
+      <p class="card-text"><strong>Role:</strong> {{ user.role }}</p>
+    </div>
+    <div class="card-footer text-end">
+      <a [routerLink]="['/manage-users']" class="btn btn-outline-secondary">Back to User List</a>
+    </div>
+  </div>
+</div>
+
+<ng-template #errorTemplate>
+  <div class="alert alert-danger" role="alert">{{ errorMessage }}</div>
+</ng-template>
