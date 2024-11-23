@@ -23,6 +23,7 @@ export class KeycloakService {
         url: 'http://localhost:9090',
         realm: 'sii-scolairexpert',
         clientId: 'sii_dev'
+      
       });
     }
     return this.keycloak;
